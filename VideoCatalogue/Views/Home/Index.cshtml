@@ -1,0 +1,84 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="video-page">
+
+    <div class="d-flex flex-wrap align-items-center justify-content-between mb-3 gap-2">
+        <div>
+            <h2 class="h4 mb-0">Media Catalogue</h2>
+            <p class="text-muted mb-0 small">
+                Upload MP4 files and play them directly from the catalogue.
+            </p>
+        </div>
+
+        <div class="btn-group mode-toggle" role="group" aria-label="Catalogue or Upload">
+            <button type="button" id="showCatalogueBtn" class="btn btn-primary btn-sm">
+                Catalogue
+            </button>
+            <button type="button" id="showUploadBtn" class="btn btn-outline-secondary btn-sm">
+                Upload
+            </button>
+        </div>
+    </div>
+
+    <!-- Catalogue view -->
+    <section id="catalogueSection" class="view-section">
+        <div id="catalogueError" class="alert alert-danger d-none"></div>
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-3" id="catalogueTable">
+                <thead class="table-light">
+                    <tr>
+                        <th scope="col">File name</th>
+                        <th scope="col" class="text-end">Size</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Populated by JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <p id="emptyCatalogueMessage" class="text-muted d-none">
+            There are no videos in the catalogue yet. Try uploading some MP4 files.
+        </p>
+
+        <div id="videoContainer" class="video-container d-none">
+            <h3 class="h6 mb-2" id="currentVideoTitle"></h3>
+            <video id="videoPlayer" controls class="video-player">
+                <source id="videoSource" src="" type="video/mp4" />
+                Your browser does not support HTML5 video.
+            </video>
+        </div>
+    </section>
+
+    <!-- Upload view -->
+    <section id="uploadSection" class="view-section d-none">
+        <div id="uploadError" class="alert alert-danger d-none"></div>
+        <div id="uploadSuccess" class="alert alert-success d-none"></div>
+
+        <form id="uploadForm" enctype="multipart/form-data" novalidate>
+            <div class="mb-3">
+                <label for="fileInput" class="form-label">Select one or more MP4 files</label>
+                <input type="file"
+                       id="fileInput"
+                       name="files"
+                       accept=".mp4,video/mp4"
+                       class="form-control"
+                       multiple />
+                <div class="form-text">
+                    Maximum total upload size: 200 MB.
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Upload
+            </button>
+
+            <span id="uploadProgress" class="ms-3 text-muted d-none">
+                Uploading, please wait...
+            </span>
+        </form>
+    </section>
+</div>
